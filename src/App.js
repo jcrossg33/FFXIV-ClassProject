@@ -1,25 +1,31 @@
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
+import { BrowserRouter, Route } from 'react-router-dom';
+
+import { Header } from './components/Header';
+import { FreeCompanyPage } from './components/FreeCompanyPage';
+import { SearchBar } from './components/SearchBar';
+import { MemberPage } from './components/MemberPage';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <div className="App">
+            <BrowserRouter>
+                <Route path="/" render={() => <Header />} />
+                <Route path="/" render={() => <SearchBar />} />
+                <Route
+                    exact
+                    path="/freeCompany/:freeCompanyId"
+                    render={(props) => <FreeCompanyPage {...props} />}
+                />
+                <Route
+                    exact
+                    path="/character/:memberID"
+                    render={(props) => <MemberPage {...props} />}
+                />
+            </BrowserRouter>
+        </div>
+    );
 }
 
 export default App;
